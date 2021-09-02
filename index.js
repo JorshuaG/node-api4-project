@@ -1,6 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
+const { restart } = require("nodemon");
 const PORT = process.env.PORT || 5000;
 
 const server = express();
@@ -19,6 +20,25 @@ const users = [
 
 server.get("/api/users", (req, res) => {
   res.json(users);
+});
+
+server.post("/api/register", (req, res) => {
+  const { name, password } = req.body;
+  if (!name || !password) {
+    res.status(400).json({ message: "missing required field" });
+  } else {
+    users.push(req.body);
+    res.status(201).json(req.body);
+  }
+});
+
+server.post("/api/login", (req, res) => {
+  const { name, password } = req.body;
+  if (!name || !password) {
+    res.status(400).json({ message: "missing required field" });
+  } else {
+    res.status(200).json({ message: `Welcome, ${req.body.name}` });
+  }
 });
 
 server.use("*", (req, res) => {
