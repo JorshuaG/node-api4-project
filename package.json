@@ -4,7 +4,7 @@
   "description": "In this challenge, you will build a simple Express app and deploy it to Heroku.",
   "main": "index.js",
   "scripts": {
-    "server": "nodemon index.js",
+    "server": "node index.js",
     "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
